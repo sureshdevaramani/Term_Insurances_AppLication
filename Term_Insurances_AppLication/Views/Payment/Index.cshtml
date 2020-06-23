@@ -1,0 +1,85 @@
+﻿@model BussinessLayer.PaymentBussinessLayer
+
+@{ 
+    ViewBag.Title = "Payment";
+    }
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron">
+        <h3 class="display-4">Please make a Payment</h3>
+        <hr class="my-1">
+
+        <div class="form-horizontal">
+            <h4>Payment</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+            @Html.LabelFor(model => model.policy_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.policy_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.policy_id, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+           
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.payment_mode, "Payment Mode", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => Model.payment_mode, "Credit Card", new { @name = "payment" })Credit Card
+                    </label>
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => Model.payment_mode, "Debit Card", new { @name = "payment" })Debit Card
+
+                    </label>
+                    @Html.ValidationMessageFor(model => model.payment_mode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.policy_premium, "Policy Premium", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @if (ViewBag.PLAN != "Life Option")
+                    {
+                        <label class="radio">
+                            @Html.RadioButtonFor(model => Model.policy_premium, ViewData["ExtraLifeOptionAnnualPremium"], new { @name = "payment" })Annual Premium of ?@ViewData["ExtraLifeOptionAnnualPremium"]
+                        </label>
+                        <label class="radio">
+                            @Html.RadioButtonFor(model => Model.policy_premium, ViewData["ExtraLifeOptionMonthlyPremium"], new { @name = "payment" })Monthly Premium of ?@ViewData["ExtraLifeOptionMonthlyPremium"]
+
+                        </label> }
+                    else
+                    {
+                        <label class="radio">
+                            @Html.RadioButtonFor(model => Model.policy_premium, ViewData["LifeOptionAnnualPremium"], new { @name = "payment" })Annual premium of ?@ViewData["LifeOptionAnnualPremium"]
+                        </label>
+                        <label class="radio">
+                            @Html.RadioButtonFor(model => Model.policy_premium, ViewData["LifeOptionMonthlyPremium"], new { @name = "payment" })Monthly Premium of ?@ViewData["LifeOptionMonthlyPremium"]
+
+                        </label>}
+
+                    @Html.ValidationMessageFor(model => model.policy_premium, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Pay" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}}

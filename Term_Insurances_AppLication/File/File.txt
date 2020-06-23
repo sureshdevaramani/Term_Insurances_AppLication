@@ -1,0 +1,28 @@
+﻿
+CalculatePremium -->Index-->A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)	 - 23/06/2020 10:36:30 AM
+------------------------
+Customer -->Index-->String was not recognized as a valid DateTime.	 - 23/06/2020 3:22:41 PM
+------------------------
+Customer -->Index-->Unable to cast object of type 'System.Int64' to type 'System.String'.	 - 23/06/2020 3:30:29 PM
+------------------------
+Customer -->Index-->Unable to cast object of type 'System.Int64' to type 'System.String'.	 - 23/06/2020 3:36:16 PM
+------------------------
+Customer -->Index-->Unable to cast object of type 'System.Int64' to type 'System.String'.	 - 23/06/2020 3:36:57 PM
+------------------------
+Customer -->Index-->Value cannot be null.
+Parameter name: items	 - 23/06/2020 3:41:20 PM
+------------------------
+Customer -->Index-->Value cannot be null.
+Parameter name: items	 - 23/06/2020 3:41:49 PM
+------------------------
+Customer -->Index-->Value cannot be null.
+Parameter name: items	 - 23/06/2020 3:45:30 PM
+------------------------
+Customer -->Index-->Value cannot be null.
+Parameter name: items	 - 23/06/2020 3:49:59 PM
+------------------------
+CalculatePremium -->Index-->Unable to cast object of type 'System.Int64' to type 'System.String'.	 - 23/06/2020 3:54:43 PM
+------------------------
+Customer -->Index-->Value cannot be null.
+Parameter name: items	 - 23/06/2020 3:58:36 PM
+------------------------

@@ -1,0 +1,158 @@
+﻿@model Term_Insurances_AppLication.Models.Policy
+
+@{
+
+    ViewBag.Title = "Policy";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Need a few more details to buy the right insurance plan</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.customer_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+    <div class="jumbotron">
+
+        <p class="lead"><h9>How much cover amount do you want?</h9></p>
+        <hr class="my-1">
+        <div class="form-group">
+            @Html.LabelFor(model => model.cover_amount, "", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cover_amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cover_amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+        <div class="jumbotron">
+            <p class="lead"><h9>How do you want to secure your nominee's future?</h9></p>
+            <hr class="my-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.payout_option, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => Model.payout_option, "lumpsum", new { @name = "payout" })After Death, a lumpsum amount paid to your Nominee
+                    </label>
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => Model.payout_option, "lumpsum+monthly", new { @name = "payout" })After Death, a lumpsum amount + additional monthly amount paid to your Nominee
+
+                    </label>
+                    @Html.ValidationMessageFor(model => model.payout_option, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="jumbotron">
+            <p class="lead"><h9>How long do you want to be insured for?</h9></p>
+            <h12>Choose number of years(min 5 years - max 45 years)</h12>
+            <hr class="my-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.policy_term, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.policy_term, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.policy_term, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <p class="lead"><h9>How would you like to pay for your insurance cover?</h9></p>
+            <h12>Max upto Insured Years</h12>
+            <hr class="my-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.payment_term, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.payment_term, new { htmlAttributes = new { @class = "form-control" } })Years.
+
+                    @Html.ValidationMessageFor(model => model.payment_term, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <h2 class="display-1">Plan Options</h2>
+            <p class="lead"><h9>Chooose the plan you want for your Term Insurance</h9></p>
+            <hr class="my-1">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.plan_type, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <label class="radio" style="font-size:large">
+                        @Html.RadioButtonFor(model => Model.plan_type, "Extra Life Option", new { @name = "plan" })Extra Life Option
+                    </label>
+                    <h9>If you want cover against accidents, this should be your go to option.</h9>
+                    <ul class="a">
+                        <li>In case of death your nominee will recieve the cover amount.</li>
+                        <li>In case of death due to an accident your nominee will recieve 2 times the cover amount.</li>
+                    </ul>
+                    <hr class="my-1">
+                    <label class="radio" style="font-size:large">
+                        @Html.RadioButtonFor(model => Model.plan_type, "Life Option", new { @name = "plan" })Life Option
+                    </label>
+                    <h9>If you are looking for a basic protetion cover for your family, this should be your go to option.</h9>
+                    <ul class="a">
+                        <li>In case of death your nominee will recieve the cover amount.</li>
+
+                    </ul>
+                    @Html.ValidationMessageFor(model => model.plan_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="jumbotron">
+            <h2 class="display-1">Add Ons</h2>
+            <p class="lead"><h9>Choose the Add Ons you want for your Term Plan</h9></p>
+            <hr class="my-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.add_on, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label class="radio" style="font-size:large">
+                        @Html.RadioButtonFor(model => Model.add_on, "Accidental Disabailty", new { @name = "add" })Accidental Permanent Disabilty
+                    </label>
+                    <h9>Extra Cover of 10 lakh rupees.</h9>
+                    <label class="radio" style="font-size:large">
+                        @Html.RadioButtonFor(model => Model.add_on, "null", new { @name = "add" })Don't want Add Ons.
+                    </label>
+
+                    <hr class="my-1">
+
+
+                    @Html.ValidationMessageFor(model => model.add_on, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
