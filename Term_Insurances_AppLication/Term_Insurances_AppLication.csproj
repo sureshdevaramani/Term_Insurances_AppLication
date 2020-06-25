@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalculatePremiumController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DocumentUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
@@ -130,6 +131,7 @@
     </Compile>
     <Compile Include="Logger\Log.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Policy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,6 +148,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -177,9 +180,12 @@
     <Content Include="Views\Home\WhyThisPlan.cshtml" />
     <Content Include="Views\CalculatePremium\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\DocumentUpload\Index.cshtml" />
+    <Content Include="Views\DocumentUpload\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Files\" />
+    <Folder Include="File Upload\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

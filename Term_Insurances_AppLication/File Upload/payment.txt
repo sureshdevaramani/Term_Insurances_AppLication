@@ -1,0 +1,358 @@
+Payment Controller:
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using Customer_Details.Models;
+
+
+namespace Customer_Details.Controllers
+{
+    public class PaymentController : Controller
+    {
+        [HttpGet]
+    public ActionResult Index(PolicyDetails cusObj)
+    {
+        string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
+        SqlConnection sqlCon = new SqlConnection(con);
+        sqlCon.Open();
+        SqlCommand sqlCmd = new SqlCommand("select policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
+        SqlDataReader sdr = sqlCmd.ExecuteReader();
+        try
+        {
+            sdr.Read();
+            {
+                cusObj.cover_amount = Convert.ToInt32(sdr["cover_amount"]);
+                cusObj.payout_option = sdr["payout_option"].ToString();
+                cusObj.policy_term = Convert.ToInt32(sdr["policy_term"]);
+                cusObj.payment_term = Convert.ToInt32(sdr["payment_term"]);
+                cusObj.plan_type = sdr["plan_type"].ToString();
+                cusObj.add_on = sdr["add_on"].ToString();
+                //string POLICYID = sdr["policy_id"].ToString();
+                ViewBag.POLICYID = Convert.ToInt32(sdr["policy_id"]);
+
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        sqlCon.Close();
+        ViewBag.PLAN = cusObj.plan_type;
+
+        double CoverAmount = cusObj.cover_amount;
+
+        double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
+        double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
+        double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+        ViewData["LifeOptionAnnualPremium"] = LAnnualPremium;
+        ViewData["LifeOptionMonthlyPremium"] = LMonthlyPremiuim;
+        ViewData["ExtraLifeOptionAnnualPremium"] = ELAnnualPremium;
+        ViewData["ExtraLifeOptionMonthlyPremium"] = ELMonthlyPremiuim;
+        sqlCon.Open();
+
+        Response.Write(ViewData["LifeOptionAnnualPremium"]);
+
+        return View();
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+    }
+    [HttpPost]
+    public ActionResult Index(Payment pa, PolicyDetails cusObj)
+    {
+        string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
+        SqlConnection sqlCon = new SqlConnection(con);
+
+        sqlCon.Open();
+
+
+
+        SqlCommand sqlCmd = new SqlCommand("select policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
+        SqlDataReader sdr = sqlCmd.ExecuteReader();
+        try
+        {
+            sdr.Read();
+            {
+                cusObj.cover_amount = Convert.ToInt32(sdr["cover_amount"]);
+                cusObj.payout_option = sdr["payout_option"].ToString();
+                cusObj.policy_term = Convert.ToInt32(sdr["policy_term"]);
+                cusObj.payment_term = Convert.ToInt32(sdr["payment_term"]);
+                cusObj.plan_type = sdr["plan_type"].ToString();
+                cusObj.add_on = sdr["add_on"].ToString();
+                //string POLICYID = sdr["policy_id"].ToString();
+                ViewBag.POLICYID = Convert.ToInt32(sdr["policy_id"]);
+
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        sqlCon.Close();
+        ViewBag.PLAN = cusObj.plan_type;
+
+        double CoverAmount = cusObj.cover_amount;
+
+        double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
+        double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
+        double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+
+        ViewData["LifeOptionAnnualPremium"] = LAnnualPremium;
+        ViewData["LifeOptionMonthlyPremium"] = LMonthlyPremiuim;
+        ViewData["ExtraLifeOptionAnnualPremium"] = ELAnnualPremium;
+        ViewData["ExtraLifeOptionMonthlyPremium"] = ELMonthlyPremiuim;
+        sqlCon.Open();
+
+        SqlCommand sqlCmd1 = new SqlCommand("INSERT into POLICY_PAYMENT (policy_id,payment_mode,payment_date,policy_premium) values (@policy_id,@payment_mode,@payment_date,@policy_premium)", sqlCon);
+        //sqlCmd1.CommandType = CommandType.StoredProcedure;
+
+        sqlCmd1.Parameters.AddWithValue("@policy_id", ViewBag.POLICYID);
+        sqlCmd1.Parameters.AddWithValue("@payment_mode", pa.payment_mode);
+        sqlCmd1.Parameters.AddWithValue("@payment_date", DateTime.Now);
+        sqlCmd1.Parameters.AddWithValue("@policy_premium", pa.policy_premium);
+
+
+
+        sqlCmd1.ExecuteNonQuery();
+
+
+        return View();
+
+
+
+    }
+
+
+}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Payment View:
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using Customer_Details.Models;
+
+
+namespace Customer_Details.Controllers
+{
+    public class PaymentController : Controller
+    {
+        [HttpGet]
+    public ActionResult Index(PolicyDetails cusObj)
+    {
+        string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
+        SqlConnection sqlCon = new SqlConnection(con);
+        sqlCon.Open();
+        SqlCommand sqlCmd = new SqlCommand("select policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
+        SqlDataReader sdr = sqlCmd.ExecuteReader();
+        try
+        {
+            sdr.Read();
+            {
+                cusObj.cover_amount = Convert.ToInt32(sdr["cover_amount"]);
+                cusObj.payout_option = sdr["payout_option"].ToString();
+                cusObj.policy_term = Convert.ToInt32(sdr["policy_term"]);
+                cusObj.payment_term = Convert.ToInt32(sdr["payment_term"]);
+                cusObj.plan_type = sdr["plan_type"].ToString();
+                cusObj.add_on = sdr["add_on"].ToString();
+                //string POLICYID = sdr["policy_id"].ToString();
+                ViewBag.POLICYID = Convert.ToInt32(sdr["policy_id"]);
+
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        sqlCon.Close();
+        ViewBag.PLAN = cusObj.plan_type;
+
+        double CoverAmount = cusObj.cover_amount;
+
+        double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
+        double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
+        double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+        ViewData["LifeOptionAnnualPremium"] = LAnnualPremium;
+        ViewData["LifeOptionMonthlyPremium"] = LMonthlyPremiuim;
+        ViewData["ExtraLifeOptionAnnualPremium"] = ELAnnualPremium;
+        ViewData["ExtraLifeOptionMonthlyPremium"] = ELMonthlyPremiuim;
+        sqlCon.Open();
+
+        Response.Write(ViewData["LifeOptionAnnualPremium"]);
+
+        return View();
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+    }
+    [HttpPost]
+    public ActionResult Index(Payment pa, PolicyDetails cusObj)
+    {
+        string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
+        SqlConnection sqlCon = new SqlConnection(con);
+
+        sqlCon.Open();
+
+
+
+        SqlCommand sqlCmd = new SqlCommand("select policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
+        SqlDataReader sdr = sqlCmd.ExecuteReader();
+        try
+        {
+            sdr.Read();
+            {
+                cusObj.cover_amount = Convert.ToInt32(sdr["cover_amount"]);
+                cusObj.payout_option = sdr["payout_option"].ToString();
+                cusObj.policy_term = Convert.ToInt32(sdr["policy_term"]);
+                cusObj.payment_term = Convert.ToInt32(sdr["payment_term"]);
+                cusObj.plan_type = sdr["plan_type"].ToString();
+                cusObj.add_on = sdr["add_on"].ToString();
+                //string POLICYID = sdr["policy_id"].ToString();
+                ViewBag.POLICYID = Convert.ToInt32(sdr["policy_id"]);
+
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        sqlCon.Close();
+        ViewBag.PLAN = cusObj.plan_type;
+
+        double CoverAmount = cusObj.cover_amount;
+
+        double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
+        double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
+        double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
+
+        if (cusObj.add_on != "")
+        {
+
+
+            LAnnualPremium = LAnnualPremium + 336;
+            LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+            ELAnnualPremium = ELAnnualPremium + 336;
+            ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
+        }
+
+
+
+
+        ViewData["LifeOptionAnnualPremium"] = LAnnualPremium;
+        ViewData["LifeOptionMonthlyPremium"] = LMonthlyPremiuim;
+        ViewData["ExtraLifeOptionAnnualPremium"] = ELAnnualPremium;
+        ViewData["ExtraLifeOptionMonthlyPremium"] = ELMonthlyPremiuim;
+        sqlCon.Open();
+
+        SqlCommand sqlCmd1 = new SqlCommand("INSERT into POLICY_PAYMENT (policy_id,payment_mode,payment_date,policy_premium) values (@policy_id,@payment_mode,@payment_date,@policy_premium)", sqlCon);
+        //sqlCmd1.CommandType = CommandType.StoredProcedure;
+
+        sqlCmd1.Parameters.AddWithValue("@policy_id", ViewBag.POLICYID);
+        sqlCmd1.Parameters.AddWithValue("@payment_mode", pa.payment_mode);
+        sqlCmd1.Parameters.AddWithValue("@payment_date", DateTime.Now);
+        sqlCmd1.Parameters.AddWithValue("@policy_premium", pa.policy_premium);
+
+
+
+        sqlCmd1.ExecuteNonQuery();
+
+
+        return View();
+
+
+
+    }
+
+
+}
+}

@@ -4,7 +4,44 @@
 
     ViewBag.Title = "Policy";
 }
+<style>
+    #box input[type ="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        text-align: center;
+        border: 2px solid #999999;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
 
+        #box input[type ="submit"]:hover {
+            background: #004c8f;
+        }
+
+
+    .inputclass {
+        border: 0;
+        background: none;
+        display: block;
+        text-align: center;
+        border: 2px solid #999999;
+        padding: 10px 5px;
+        width: 200px;
+        outline: none;
+        color: black;
+        border-radius: 10px;
+        transition: 0.25s;
+    }
+
+        .inputclass input[type ="text"]:focus {
+            width: 280px;
+        }
+</style>
 <h2>Index</h2>
 
 
@@ -31,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cover_amount, "", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cover_amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.cover_amount, new { htmlAttributes = new { @class = "inputclass" } })
                 @Html.ValidationMessageFor(model => model.cover_amount, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +102,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.policy_term, "", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.policy_term, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.policy_term, new { htmlAttributes = new { @class = "inputclass" } })
                     @Html.ValidationMessageFor(model => model.policy_term, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -78,7 +115,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.payment_term, "", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.payment_term, new { htmlAttributes = new { @class = "form-control" } })Years.
+                    @Html.EditorFor(model => model.payment_term, new { htmlAttributes = new { @class = "inputclass" } })Years.
 
                     @Html.ValidationMessageFor(model => model.payment_term, "", new { @class = "text-danger" })
                 </div>
@@ -142,7 +179,7 @@
 
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10" id="box">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>

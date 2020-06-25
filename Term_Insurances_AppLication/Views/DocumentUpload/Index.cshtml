@@ -1,0 +1,214 @@
+﻿@model Term_Insurances_AppLication.Models.Document
+    <style>
+        #box input[type ="submit"] {
+            border: 0;
+            margin:0 0 0 0 ;
+            background: none;
+            display: block;
+            text-align: left;
+            border: 2px solid #999999;
+            padding: 10px 20px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+            #box input[type ="submit"]:hover {
+                background: #004c8f;
+            }
+    </style>
+<h3 style="color:red">To issue the policy we require any one of the following documents to be submitted</h3>
+
+<hr />
+
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script>
+    function random_function() {
+
+
+        var a = document.getElementById("input").value;
+        if (a === "Aadhaar card") {
+            var arr = ["Voter ID", "Passport"];
+        }
+        else if (a === "Voter ID") {
+            var arr = ["Passport", "Aadhaar card"];
+        }
+        else if (a === "Passport") {
+            var arr = ["Aadhaar card", "Voter ID"];
+        }
+        else {
+            var arr = [];
+        }
+        var string = "";
+
+        for (i = 0; i < arr.length; i++) {
+           // string = string + arr[i];
+           string = string + "<option >" + arr[i] + "</option>";
+        }
+        string = "<select class=" +"form-control"+" name= " + "Dropdown2" + ">" + string + "</select>";
+        document.getElementById("output").innerHTML = string;
+
+       }
+</script>
+
+@using (Html.BeginForm("Index", "DocumentUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="jumbotron">
+        <div class="form-horizontal">
+            <div style="color:#004c8f">
+
+                <hr />
+
+                <label>Address Proof 1</label>
+                <select class="form-control" id="input" name="Departments" onchange="random_function()">
+                    <option>Select One</option>
+                    <option>Aadhaar card</option>
+                    <option>Voter ID</option>
+                    <option>Passport</option>
+                </select>
+
+                <div>
+                    <label class="txtColor">Attachment:</label>
+                    <input id="fileInput" type="file" value="File" name="File_Attachment1" />
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div>
+                    <input id="FileUpload" class="form-control" type="button" name="Upload" value="Upload File" />
+                </div>
+                <div class="text-success" id="SucessMessage"></div>
+                <div class="text-danger" id="ErrorMessage"></div>
+                <div class="text-danger" id="SelectFile"> </div>
+
+                <label>Address Proof 2</label>
+                <div id="output">
+
+                    <select class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div>
+                    <label class="txtColor">Attachment:</label>
+                    <input id="fileInput1" type="file" value="File" name="File_Attachment2" />
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div>
+                    <input id="FileUpload1" class="form-control" type="button" name="Upload" value="Upload File" />
+                </div>
+                <div class="text-success" id="SucessMessage1"></div>
+                <div class="text-danger" id="ErrorMessage1"></div>
+                <div class="text-danger" id="SelectFile1"> </div>
+
+                <div class="text-danger" id="SelectFile1"> </div>
+
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" id="box">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+}
+
+<script>
+    $(document).ready(function () {
+        $("#FileUpload").click(function () {
+            var uploadedFiles = $("#fileInput").get(0);
+            var files = uploadedFiles.files;
+            var formData = new FormData();
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append(files[i].name, files[i]);
+            }
+            if (files.length <= 0) {
+                $('#SucessMessage').hide();
+                $('#SelectFile').html("Please Select File");
+                $('#SelectFile').show();
+            }
+            else {
+                $.ajax({
+                    url: '/DocumentUpload/FileUpload',
+                    type: 'Post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (message) {
+                        $('#SelectFile').hide();
+                        $('#SucessMessage').html("File Uploaded Sucessfully");
+                        $('#SucessMessage').show();
+                    },
+                    error: function () {
+                        $('#SucessMessage').hide();
+                        $('#SelectFile').hide();
+                        $('#ErrorMessage').html("Error while uploading files");
+                        $('#ErrorMessage').show();
+                    }
+                })
+            }
+
+        })
+      
+    })
+    $(document).ready(function () {
+        $("#FileUpload1").click(function () {
+            var uploadedFiles = $("#fileInput1").get(0);
+            var files = uploadedFiles.files;
+            var formData = new FormData();
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append(files[i].name, files[i]);
+            }
+            if (files.length <= 0) {
+                $('#SucessMessage1').hide();
+                $('#SelectFile1').html("Please Select File");
+                $('#SelectFile1').show();
+            }
+            else {
+                $.ajax({
+                    url: '/DocumentUpload/FileUpload',
+                    type: 'Post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (message) {
+                        $('#SelectFile1').hide();
+                        $('#SucessMessage1').html("File Uploaded Sucessfully");
+                        $('#SucessMessage1').show();
+                    },
+                    error: function () {
+                        $('#SucessMessage1').hide();
+                        $('#SelectFile1').hide();
+                        $('#ErrorMessage1').html("Error while uploading files");
+                        $('#ErrorMessage1').show();
+                    }
+                })
+            }
+
+        })
+
+    })
+
+   
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

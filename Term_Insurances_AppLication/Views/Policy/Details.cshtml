@@ -7,7 +7,25 @@
 }
 
 
+<style>
+    #box input[type ="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        text-align: center;
+        border: 2px solid #999999;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
 
+        #box input[type ="submit"]:hover {
+            background: #004c8f;
+        }
+</style>
 
 @{
     double CoverAmount = Model.cover_amount;
@@ -162,7 +180,7 @@
         </dl>
         <div class="form-group">
 
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10" id="box">
 
                 <a class="btn btn-primary" href="@Url.Action("Index","Payment")" target="_blank">Continue to pay</a>
 

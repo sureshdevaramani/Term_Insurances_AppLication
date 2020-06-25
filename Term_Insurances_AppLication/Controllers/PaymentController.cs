@@ -118,7 +118,7 @@ namespace Term_Insurances_AppLication.Controllers
 
 
 
-            return View();
+            return RedirectToAction("Index","DocumentUpload");
 
 
 
