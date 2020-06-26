@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCustomer.cs" />
+    <Compile Include="AddDocumentDetails.cs" />
     <Compile Include="AddPayment.cs" />
     <Compile Include="AddPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

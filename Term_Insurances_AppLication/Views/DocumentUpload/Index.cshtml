@@ -59,7 +59,7 @@
            // string = string + arr[i];
            string = string + "<option >" + arr[i] + "</option>";
         }
-        string = "<select class=" +"form-control"+" name= " + "Dropdown2" + ">" + string + "</select>";
+        string = "<select class=" + "form-control" + " name= " + "AddressProof2" + ">" + string + "</select>";
         document.getElementById("output").innerHTML = string;
 
        }
@@ -75,7 +75,7 @@
                     <hr />
 
                     <label>Address Proof 1</label>
-                    <select class="form-control" id="input" name="Departments" onchange="random_function()">
+                    <select class="form-control" id="input" name="AddressProof" onchange="random_function()">
 
                         <option>Aadhaar card</option>
                         <option>Voter ID</option>
@@ -86,7 +86,8 @@
                         <label class="txtColor">Attachment:</label>
                         <input id="fileInput" type="file" value="File" name="File_Attachment1" />
                     </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <hr />
                     <div>
                         <input id="FileUpload" class="form-control" type="button" name="Upload" value="Upload File" />
                     </div>
@@ -97,7 +98,7 @@
                     <label>Address Proof 2</label>
                     <div id="output">
 
-                        <select class="form-control">
+                        <select class="form-control" name="AddressProof2">
 
                            
                             <option>Voter ID</option>
@@ -109,7 +110,7 @@
                         <label class="txtColor">Attachment:</label>
                         <input id="fileInput1" type="file" value="File" name="File_Attachment2" />
                     </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <hr />
                     <div>
                         <input id="FileUpload1" class="form-control" type="button" name="Upload" value="Upload File" />
                     </div>
