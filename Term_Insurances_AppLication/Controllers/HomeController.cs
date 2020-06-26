@@ -15,7 +15,7 @@ namespace Term_Insurances_AppLication.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+           
 
             return View();
         }

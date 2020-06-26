@@ -27,29 +27,26 @@
         }
 </style>
 
+
 @{
-    double CoverAmount = Model.cover_amount;
+     double CoverAmount = Model.cover_amount;
 
     double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
-    double LOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
+    double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
     double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
-    double ELOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
-
-
-
+    double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
 }
 
-<div>
 
+<h3 class="display-4" style="color:red">Here is a summary of your plan</h3>
+<hr class="my-1">
 
-
+<div style="color:#004c8f">
     <div class="jumbotron">
-        <h3 class="display-4">Here is a summary of your plan</h3>
-        <hr class="my-1">
-
         <dl class="dl-horizontal">
+
             <dt>
                 Your Policy ID
             </dt>
@@ -57,10 +54,8 @@
             <dd>
                 @ViewBag.POLICY_Id
             </dd>
-        </dl>
 
-        <dl class="dl-horizontal">
-
+            <hr class="my-1">
             <dt>
                 Your Insurance Plan
             </dt>
@@ -80,13 +75,13 @@
             </dd>
             <hr class="my-1">
 
-            @if (Model.plan_type == "Life Option")
+            @if (Model.plan_type != "Life Option")
             {
                 <dt>
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
+                    Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
                 </dd>
             }
             else
@@ -95,7 +90,7 @@
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
+                    Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
                 </dd>
             }
 
@@ -131,10 +126,10 @@
                 <hr class="my-1">
 
                 LAnnualPremium = LAnnualPremium + 336;
-                LOneTimePremiuim = LOneTimePremiuim + (Model.payment_term * 336);
+                LMonthlyPremiuim = LMonthlyPremiuim + 28;
 
                 ELAnnualPremium = ELAnnualPremium + 336;
-                ELOneTimePremiuim = ELOneTimePremiuim + (Model.payment_term * 336);
+                ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
 
             }
 
@@ -156,44 +151,35 @@
             }
             <hr class="my-1">
             <dt>
-                One Time Payment Amount
+                Monthly Payment Amount
             </dt>
 
             @if (Model.plan_type == "Life Option")
             {
                 <dd>
-                    ₹@LOneTimePremiuim
+                    ₹@LMonthlyPremiuim
                 </dd>
             }
             else
             {
                 <dd>
-                    ₹@ELOneTimePremiuim
+                    ₹@ELMonthlyPremiuim
                 </dd>
             }
-
-
-
-
-
-
         </dl>
-        <div class="form-group">
-
-            <div class="col-md-offset-2 col-md-10" id="box">
-
-                <a class="btn btn-primary" href="@Url.Action("Index","Payment")" target="_blank">Continue to pay</a>
-
+        <center>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Payment")">Continue To Payment</a>
+                </div>
             </div>
+        </center>
 
-
-
-
-        </div>
     </div>
+
 </div>
 
-<p>
-    @Html.ActionLink("Pay", "Index", "Payment")
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<hr />
+
+
+
