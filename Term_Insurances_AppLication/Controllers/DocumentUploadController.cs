@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Term_Insurances_AppLication.Models;
 using System.IO;
+using DataAccessLayer;
 
 namespace Term_Insurances_AppLication.Controllers
 {
@@ -46,10 +47,15 @@ namespace Term_Insurances_AppLication.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(Document dc,FormCollection formdata, HttpPostedFileBase File_Attachment1, HttpPostedFileBase File_Attachment2, string DropDown)
+        public ActionResult Index(Document dc,FormCollection formdata, HttpPostedFileBase File_Attachment1, HttpPostedFileBase File_Attachment2)
         {
-            Response.Write(formdata["Departments"]);
-            Response.Write(formdata["Dropdown2"]);
+            string addressSelected = formdata["AddressProof"].ToString();
+            string addressSelected2 = formdata["AddressProof2"].ToString();
+            Response.Write(addressSelected);
+            Response.Write(addressSelected2);
+
+
+
             /* if (Request.Files.Count > 0)
              {*/
             if (File_Attachment1.ContentLength > 0)
@@ -74,7 +80,9 @@ namespace Term_Insurances_AppLication.Controllers
             Response.Write(FileName1);
             Response.Write(FileName2);
 
+            AddDocumentDetails documents = new AddDocumentDetails();
 
+            documents.AddDocuments(addressSelected, FileName1, addressSelected2, FileName2);/*
             string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
             SqlConnection sqlCon = new SqlConnection(con);
 
@@ -106,7 +114,7 @@ namespace Term_Insurances_AppLication.Controllers
 
 
             sqlCmd1.ExecuteNonQuery();
-
+            */
             return RedirectToRoute(new
             {
                 controller = "DocumentUpload",

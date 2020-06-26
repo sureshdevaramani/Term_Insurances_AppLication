@@ -2,7 +2,7 @@
     <style>
         #box input[type ="submit"] {
             border: 0;
-            margin:0 0 0 0 ;
+            margin-right:1000px ;
             background: none;
             display: block;
             text-align: left;
@@ -11,13 +11,19 @@
             outline: none;
             color: white;
             border-radius: 24px;
-            transition: 0.25s;
+           
+
             cursor: pointer;
         }
 
             #box input[type ="submit"]:hover {
                 background: #004c8f;
             }
+
+            .moveleft{
+                margin-left: 170px;
+            }
+
     </style>
 <h3 style="color:red">To issue the policy we require any one of the following documents to be submitted</h3>
 
@@ -53,7 +59,7 @@
            // string = string + arr[i];
            string = string + "<option >" + arr[i] + "</option>";
         }
-        string = "<select class=" +"form-control"+" name= " + "Dropdown2" + ">" + string + "</select>";
+        string = "<select class=" + "form-control" + " name= " + "AddressProof2" + ">" + string + "</select>";
         document.getElementById("output").innerHTML = string;
 
        }
@@ -65,52 +71,58 @@
     <div class="jumbotron">
         <div class="form-horizontal">
             <div style="color:#004c8f">
+                <div class="moveleft">
+                    <hr />
 
-                <hr />
+                    <label>Address Proof 1</label>
+                    <select class="form-control" id="input" name="AddressProof" onchange="random_function()">
 
-                <label>Address Proof 1</label>
-                <select class="form-control" id="input" name="Departments" onchange="random_function()">
-                    <option>Select One</option>
-                    <option>Aadhaar card</option>
-                    <option>Voter ID</option>
-                    <option>Passport</option>
-                </select>
-
-                <div>
-                    <label class="txtColor">Attachment:</label>
-                    <input id="fileInput" type="file" value="File" name="File_Attachment1" />
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>
-                    <input id="FileUpload" class="form-control" type="button" name="Upload" value="Upload File" />
-                </div>
-                <div class="text-success" id="SucessMessage"></div>
-                <div class="text-danger" id="ErrorMessage"></div>
-                <div class="text-danger" id="SelectFile"> </div>
-
-                <label>Address Proof 2</label>
-                <div id="output">
-
-                    <select class="form-control">
-                        <option></option>
+                        <option>Aadhaar card</option>
+                        <option>Voter ID</option>
+                        <option>Passport</option>
                     </select>
-                </div>
-                <div>
-                    <label class="txtColor">Attachment:</label>
-                    <input id="fileInput1" type="file" value="File" name="File_Attachment2" />
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>
-                    <input id="FileUpload1" class="form-control" type="button" name="Upload" value="Upload File" />
-                </div>
-                <div class="text-success" id="SucessMessage1"></div>
-                <div class="text-danger" id="ErrorMessage1"></div>
-                <div class="text-danger" id="SelectFile1"> </div>
 
-                <div class="text-danger" id="SelectFile1"> </div>
+                    <div>
+                        <label class="txtColor">Attachment:</label>
+                        <input id="fileInput" type="file" value="File" name="File_Attachment1" />
+                    </div>
+                    
+                    <hr />
+                    <div>
+                        <input id="FileUpload" class="form-control" type="button" name="Upload" value="Upload File" />
+                    </div>
+                    <div class="text-success" id="SucessMessage"></div>
+                    <div class="text-danger" id="ErrorMessage"></div>
+                    <div class="text-danger" id="SelectFile"> </div>
+
+                    <label>Address Proof 2</label>
+                    <div id="output">
+
+                        <select class="form-control" name="AddressProof2">
+
+                           
+                            <option>Voter ID</option>
+                            <option>Passport</option>
+
+                        </select>
+                    </div>
+                    <div>
+                        <label class="txtColor">Attachment:</label>
+                        <input id="fileInput1" type="file" value="File" name="File_Attachment2" />
+                    </div>
+                   <hr />
+                    <div>
+                        <input id="FileUpload1" class="form-control" type="button" name="Upload" value="Upload File" />
+                    </div>
+                    <div class="text-success" id="SucessMessage1"></div>
+                    <div class="text-danger" id="ErrorMessage1"></div>
+                    <div class="text-danger" id="SelectFile1"> </div>
+
+                    <div class="text-danger" id="SelectFile1"> </div>
 
 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>            
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10" id="box">
                         <input type="submit" value="Save" class="btn btn-primary" />
