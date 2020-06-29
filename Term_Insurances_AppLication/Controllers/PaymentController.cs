@@ -9,11 +9,6 @@ using System.Data.SqlClient;
 using Term_Insurances_AppLication.Models;
 using System.Configuration;
 using BussinessLayer;
-using Twilio.AspNet.Common;
-using Twilio.AspNet.Mvc;
-using Twilio.TwiML;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace Term_Insurances_AppLication.Controllers
 {
@@ -118,20 +113,6 @@ namespace Term_Insurances_AppLication.Controllers
             ViewData["ExtraLifeOptionMonthlyPremium"] = ELMonthlyPremiuim;
 
             Pa.AddPaymentDetails(Policy_id, pa.payment_mode, pa.policy_premium);
-            long Phone = (long)Convert.ToDouble(TempData["Phone_Number"]);
-
-            const string accountSid = "ACf589355e9dff8b19c8a1571903581f58";
-            const string authToken = "72c758060fd3a9617de671154d11499c";
-
-            TwilioClient.Init(accountSid, authToken);
-
-            var message = MessageResource.Create(
-                body: "Hi" + TempData["First_Name"] + ", this message is to confirm that the premium payment amount of ₹" + pa.policy_premium + " for the Policy No. " + ViewBag.POLICYID + " has been completed successfully on " + DateTime.Now + ". Thank you!",
-                from: new Twilio.Types.PhoneNumber("+12017013713"),
-                to: new Twilio.Types.PhoneNumber("+91" + TempData["Phone_Number"])
-            );
-
-            Console.WriteLine(message.Sid);
 
 
 

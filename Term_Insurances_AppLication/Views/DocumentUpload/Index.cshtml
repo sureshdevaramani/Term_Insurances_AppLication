@@ -73,48 +73,46 @@
             <div style="color:#004c8f">
                 <div class="moveleft">
                     <hr />
-                    <div>
-                        <label>Address Proof</label>
-                        <select class="form-control" id="input" name="AddressProof" onchange="random_function()">
 
-                            <option>Aadhaar card</option>
-                            <option>Voter ID</option>
-                            <option>Passport</option>
-                        </select>
-                    </div>
+                    <label>Address Proof 1</label>
+                    <select class="form-control" id="input" name="AddressProof" onchange="random_function()">
+
+                        <option>Aadhaar card</option>
+                        <option>Voter ID</option>
+                        <option>Passport</option>
+                    </select>
+
                     <div>
                         <label class="txtColor">Attachment:</label>
-                        <input id="fileInput" type="file" value="File" name="File_Attachment1" />
+                        <input id="fileInput" type="file" value="File" required name="File_Attachment1" />
                     </div>
-                    <br/>
+                    
+                    <hr />
                     <div>
-                        <input id="FileUpload" class="form-control" type="button" name="Upload" value="Upload File" />
+                        <input id="FileUpload" class="form-control"  type="button" name="Upload" value="Upload File" />
                     </div>
                     <div class="text-success" id="SucessMessage"></div>
                     <div class="text-danger" id="ErrorMessage"></div>
                     <div class="text-danger" id="SelectFile"> </div>
-                    <hr />
 
-                    <label>Age Proof</label>
+                    <label>Address Proof 2</label>
                     <div id="output">
-                        <div>
-                            <select class="form-control" name="AddressProof2">
 
+                        <select class="form-control" name="AddressProof2">
 
-                                <option>Voter ID</option>
-                                <option>Passport</option>
+                           
+                            <option>Voter ID</option>
+                            <option>Passport</option>
 
-                            </select>
-                        </div>
+                        </select>
                     </div>
                     <div>
                         <label class="txtColor">Attachment:</label>
-                        <input id="fileInput1" type="file" value="File" name="File_Attachment2" />
+                        <input id="fileInput1" type="file" value="File" required name="File_Attachment2" />
                     </div>
-                 
-                    <br />
+                   <hr />
                     <div>
-                        <input id="FileUpload1" class="form-control" type="button" name="Upload" value="Upload File" />
+                        <input id="FileUpload1" class="form-control"  type="button" name="Upload" value="Upload File" />
                     </div>
                     <div class="text-success" id="SucessMessage1"></div>
                     <div class="text-danger" id="ErrorMessage1"></div>
@@ -123,7 +121,7 @@
                     <div class="text-danger" id="SelectFile1"> </div>
 
 
-                   <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>            
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10" id="box">
