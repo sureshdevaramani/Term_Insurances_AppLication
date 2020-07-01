@@ -9,8 +9,7 @@ using System.Data.SqlClient;
 using Term_Insurances_AppLication.Models;
 using System.Configuration;
 using BussinessLayer;
-using Twilio.AspNet.Common;
-using Twilio.AspNet.Mvc;
+
 using Twilio.TwiML;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -132,7 +131,6 @@ namespace Term_Insurances_AppLication.Controllers
             );
 
             Console.WriteLine(message.Sid);
-
 
 
 

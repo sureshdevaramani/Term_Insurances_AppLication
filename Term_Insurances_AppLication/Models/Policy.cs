@@ -11,6 +11,8 @@ namespace Term_Insurances_AppLication.Models
         public int customer_id { get; set; }
         [Required(ErrorMessage = "Please enter Cover amount")]
 
+        public int policy_id { get; set; }
+
         [Range(5000000, 10000000000, ErrorMessage = "Please Enter Cover Amount")]
         public int cover_amount { get; set; }
         [Required(ErrorMessage = "Please choose anyone of the plan")]
@@ -34,6 +36,8 @@ namespace Term_Insurances_AppLication.Models
         public bool policy_active_flag { get; set; }
 
         public string policy_applied { get; set; }
+
+        public List<Policy> policylist { get; set; }
 
     }
 }

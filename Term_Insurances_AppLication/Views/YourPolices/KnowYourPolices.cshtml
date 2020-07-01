@@ -1,4 +1,13 @@
-﻿@model Term_Insurances_AppLication.Models.Policy
+﻿
+@model Term_Insurances_AppLication.Models.Policy
+@{
+    ViewBag.Title = "KnowYourPolices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Polices</h2>
+
+
 
 
 @{
@@ -27,26 +36,27 @@
         }
 </style>
 
-@{
-    double CoverAmount = Model.cover_amount;
+
+@foreach (var ele in Model.policylist)
+{
+  
+    double CoverAmount = ele.cover_amount ;
 
     double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
-    double LOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
+    double LOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
 
     double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
-    double ELOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
+    double ELOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
 
 
 
 
-}
 
 <div>
 
 
 
     <div class="jumbotron">
-        <h3 class="display-4">Here is a summary of your plan</h3>
         <hr class="my-1">
 
         <dl class="dl-horizontal">
@@ -55,7 +65,8 @@
             </dt>
 
             <dd>
-                @ViewBag.POLICY_Id
+                @ele.policy_id
+            
             </dd>
         </dl>
 
@@ -66,7 +77,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.plan_type)
+                @Html.DisplayFor(model => ele.plan_type)
             </dd>
 
             <hr class="my-1">
@@ -76,7 +87,7 @@
             </dt>
 
             <dd>
-                ₹@Html.DisplayFor(model => model.cover_amount)
+                ₹@Html.DisplayFor(model => ele.cover_amount)
             </dd>
             <hr class="my-1">
 
@@ -86,7 +97,7 @@
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
+                    @Html.DisplayFor(model => ele.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => ele.cover_amount) + additional of ₹@Html.DisplayFor(model => ele.cover_amount) incase of death by accident.
                 </dd>
             }
             else
@@ -95,7 +106,7 @@
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
+                    @Html.DisplayFor(model => ele.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => ele.cover_amount)
                 </dd>
             }
 
@@ -105,7 +116,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.policy_term) Years
+                @Html.DisplayFor(model => ele.policy_term) Years
             </dd>
             <hr class="my-1">
             <dt>
@@ -113,12 +124,12 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.payment_term) Years
+                @Html.DisplayFor(model => ele.payment_term) Years
             </dd>
 
             <hr class="my-1">
 
-            @if (Model.add_on != "")
+            @if (ele.add_on != "null")
             {
                 <dt>
                     Add Ons
@@ -126,15 +137,15 @@
 
 
                 <dd>
-                    @Html.DisplayFor(model => model.add_on) cover of ₹10,00,000.
+                    @Html.DisplayFor(model => ele.add_on) cover of ₹10,00,000.
                 </dd>
                 <hr class="my-1">
 
                 LAnnualPremium = LAnnualPremium + 336;
-                LOneTimePremiuim = LOneTimePremiuim + (Model.payment_term * 336);
+                LOneTimePremiuim = LOneTimePremiuim + (ele.payment_term * 336);
 
                 ELAnnualPremium = ELAnnualPremium + 336;
-                ELOneTimePremiuim = ELOneTimePremiuim + (Model.payment_term * 336);
+                ELOneTimePremiuim = ELOneTimePremiuim + (ele.payment_term * 336);
 
             }
 
@@ -142,7 +153,7 @@
                 Annual Premium Amount
             </dt>
 
-            @if (Model.plan_type == "Life Option")
+            @if (ele.plan_type == "Life Option")
             {
                 <dd>
                     ₹@LAnnualPremium
@@ -159,7 +170,7 @@
                 One Time Payment Amount
             </dt>
 
-            @if (Model.plan_type == "Life Option")
+            @if (ele.plan_type == "Life Option")
             {
                 <dd>
                     ₹@LOneTimePremiuim
@@ -178,18 +189,7 @@
 
 
         </dl>
-        <div class="form-group">
-
-            <div class="col-md-offset-2 col-md-10" id="box">
-
-                <a class="btn btn-primary" href="@Url.Action("Index","Payment")" target="_blank">Continue to pay</a>
-
-            </div>
-
-
-
-
-        </div>
+       
     </div>
 </div>
-
+}

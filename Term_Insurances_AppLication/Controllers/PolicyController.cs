@@ -34,7 +34,7 @@ namespace Term_Insurances_AppLication.Controllers
 
             ViewBag.POLICY_Id = Policy_id;
 
-            cusObj.cover_amount = policy.Cover_Amount;
+                cusObj.cover_amount = policy.Cover_Amount;
                 cusObj.payout_option = policy.Payout_option;
                 cusObj.policy_term = policy.Policy_term;
                 cusObj.payment_term = policy.Payment_term;
