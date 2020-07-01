@@ -18,7 +18,7 @@ namespace DataAccessLayer
         public string Plan_Type;
         public string Add_on;
         public int policy_id;
-
+        public int Customer_id;
 
         public void GetCobverAmount()
         {
@@ -30,11 +30,12 @@ namespace DataAccessLayer
 
 
 
-            SqlCommand sqlCmd = new SqlCommand("select policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
+            SqlCommand sqlCmd = new SqlCommand("select customer_id,policy_id,cover_amount,payout_option,policy_term,payment_term,plan_type,add_on from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
             SqlDataReader sdr = sqlCmd.ExecuteReader();
 
             sdr.Read();
             {
+                this.Customer_id = Convert.ToInt32(sdr["customer_id"]);
                 this.Cover_Amount = Convert.ToInt32(sdr["cover_amount"]);
 
                 this.Plan_Type = sdr["plan_type"].ToString();

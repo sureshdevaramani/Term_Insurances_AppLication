@@ -31,10 +31,10 @@
     double CoverAmount = Model.cover_amount;
 
     double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
-    double LOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
+    double LMonthlyPremiuim = Math.Round(LAnnualPremium /12, 2);
 
     double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
-    double ELOneTimePremiuim = Math.Round(LAnnualPremium * Model.payment_term, 2);
+    double EMonthlyPremiuim = Math.Round(LAnnualPremium /12, 2);
 
 
 
@@ -86,7 +86,7 @@
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
+                     Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
                 </dd>
             }
             else
@@ -95,7 +95,7 @@
                     Nominee wil receive
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
+                     Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
                 </dd>
             }
 
@@ -118,7 +118,7 @@
 
             <hr class="my-1">
 
-            @if (Model.add_on != "")
+            @if (Model.add_on != "null")
             {
                 <dt>
                     Add Ons
@@ -131,10 +131,10 @@
                 <hr class="my-1">
 
                 LAnnualPremium = LAnnualPremium + 336;
-                LOneTimePremiuim = LOneTimePremiuim + (Model.payment_term * 336);
+                LMonthlyPremiuim = LMonthlyPremiuim + 28;
 
                 ELAnnualPremium = ELAnnualPremium + 336;
-                ELOneTimePremiuim = ELOneTimePremiuim + (Model.payment_term * 336);
+                EMonthlyPremiuim = EMonthlyPremiuim + 28;
 
             }
 
@@ -162,13 +162,13 @@
             @if (Model.plan_type == "Life Option")
             {
                 <dd>
-                    ₹@LOneTimePremiuim
+                    ₹@LMonthlyPremiuim
                 </dd>
             }
             else
             {
                 <dd>
-                    ₹@ELOneTimePremiuim
+                    ₹@EMonthlyPremiuim
                 </dd>
             }
 
@@ -182,7 +182,7 @@
 
             <div class="col-md-offset-2 col-md-10" id="box">
 
-                <a class="btn btn-primary" href="@Url.Action("Index","Payment")" target="_blank">Continue to pay</a>
+                <a class="btn btn-primary" href="@Url.Action("Index","Payment")" >Continue to pay</a>
 
             </div>
 
