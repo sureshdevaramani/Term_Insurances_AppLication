@@ -1,9 +1,22 @@
-﻿
-@{
-    ViewBag.Title = "ThankYou";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@{ ViewBag.Title = "ThankYou";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+<br />
+<div class="container-fluid">
+    <Center>
+        <div class="card">
 
-<h2>Thank You For Choosing Our Term PLoicy </h2>
+            <img class="card-img-top" src="~/Images/Thank.jpeg" />
 
-@Html.ActionLink("Click Here to return to Home Page", "Index", "Home")
+        </div>
+    </Center>
+
+    <marquee>
+        <h2 style=" color:red">Thank you for choosing our Term Policy</h2>
+    </marquee>
+
+
+
+    <center>
+        <h4>@Html.ActionLink("Click Here to return to Home Page", "Index", "Home")</h4>
+    </center>
+</div>
