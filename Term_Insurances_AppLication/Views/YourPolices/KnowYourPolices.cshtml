@@ -1,0 +1,195 @@
+﻿
+@model Term_Insurances_AppLication.Models.Policy
+@{
+    ViewBag.Title = "KnowYourPolices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Polices</h2>
+
+
+
+
+@{
+    ViewBag.Title = "PolicyDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #box input[type ="submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        text-align: center;
+        border: 2px solid #999999;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+        #box input[type ="submit"]:hover {
+            background: #004c8f;
+        }
+</style>
+
+
+@foreach (var ele in Model.policylist)
+{
+  
+    double CoverAmount = ele.cover_amount ;
+
+    double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
+    double LOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
+
+    double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
+    double ELOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
+
+
+
+
+
+<div>
+
+
+
+    <div class="jumbotron">
+        <hr class="my-1">
+
+        <dl class="dl-horizontal">
+            <dt>
+                Your Policy ID
+            </dt>
+
+            <dd>
+                @ele.policy_id
+            
+            </dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                Your Insurance Plan
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => ele.plan_type)
+            </dd>
+
+            <hr class="my-1">
+
+            <dt>
+                Your Insurance Cover
+            </dt>
+
+            <dd>
+                ₹@Html.DisplayFor(model => ele.cover_amount)
+            </dd>
+            <hr class="my-1">
+
+            @if (Model.plan_type == "Life Option")
+            {
+                <dt>
+                    Nominee wil receive
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => ele.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => ele.cover_amount) + additional of ₹@Html.DisplayFor(model => ele.cover_amount) incase of death by accident.
+                </dd>
+            }
+            else
+            {
+                <dt>
+                    Nominee wil receive
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => ele.payout_option) i.e Cover Amount of ₹@Html.DisplayFor(model => ele.cover_amount)
+                </dd>
+            }
+
+            <hr class="my-1">
+            <dt>
+                Policy Term
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => ele.policy_term) Years
+            </dd>
+            <hr class="my-1">
+            <dt>
+                Premium paying term
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => ele.payment_term) Years
+            </dd>
+
+            <hr class="my-1">
+
+            @if (ele.add_on != "null")
+            {
+                <dt>
+                    Add Ons
+                </dt>
+
+
+                <dd>
+                    @Html.DisplayFor(model => ele.add_on) cover of ₹10,00,000.
+                </dd>
+                <hr class="my-1">
+
+                LAnnualPremium = LAnnualPremium + 336;
+                LOneTimePremiuim = LOneTimePremiuim + (ele.payment_term * 336);
+
+                ELAnnualPremium = ELAnnualPremium + 336;
+                ELOneTimePremiuim = ELOneTimePremiuim + (ele.payment_term * 336);
+
+            }
+
+            <dt>
+                Annual Premium Amount
+            </dt>
+
+            @if (ele.plan_type == "Life Option")
+            {
+                <dd>
+                    ₹@LAnnualPremium
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    ₹@ELAnnualPremium
+                </dd>
+            }
+            <hr class="my-1">
+            <dt>
+                One Time Payment Amount
+            </dt>
+
+            @if (ele.plan_type == "Life Option")
+            {
+                <dd>
+                    ₹@LOneTimePremiuim
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    ₹@ELOneTimePremiuim
+                </dd>
+            }
+
+
+
+
+
+
+        </dl>
+       
+    </div>
+</div>
+}
