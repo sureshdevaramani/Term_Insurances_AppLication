@@ -3,12 +3,19 @@
     ViewBag.Title = "KnowYourPolices1";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<center>
+    <div class="jumbotron">
 
-<h2>You do not have any polices  </h2>
+        <h3 style="color:Red">You do not have any polices! Please buy a policy </h3>
 
-<h3>Buy a policy</h3>
+      
+        @Html.ActionLink("Click Here to return to Home Page", "Index", "Home")
+    </div>
+</center>
+       
 
 
-@Html.ActionLink("Click Here to return to Home Page", "Index", "Home")
+
 
 

@@ -39,25 +39,20 @@
 
 @foreach (var ele in Model.policylist)
 {
-  
-    double CoverAmount = ele.cover_amount ;
+
+    double CoverAmount = ele.cover_amount;
 
     double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
-    double LOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
+    double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
     double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
-    double ELOneTimePremiuim = Math.Round(LAnnualPremium * ele.payment_term, 2);
+    double ELMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
 
 
-
-
-<div>
-
-
-
-    <div class="jumbotron">
-        <hr class="my-1">
+<div class="jumbotron">
+    <div style="color:#004c8f">
+       <br />
 
         <dl class="dl-horizontal">
             <dt>
@@ -66,7 +61,7 @@
 
             <dd>
                 @ele.policy_id
-            
+
             </dd>
         </dl>
 
@@ -80,7 +75,7 @@
                 @Html.DisplayFor(model => ele.plan_type)
             </dd>
 
-            <hr class="my-1">
+    <br />
 
             <dt>
                 Your Insurance Cover
@@ -89,7 +84,7 @@
             <dd>
                 ₹@Html.DisplayFor(model => ele.cover_amount)
             </dd>
-            <hr class="my-1">
+          <br />
 
             @if (Model.plan_type == "Life Option")
             {
@@ -110,7 +105,7 @@
                 </dd>
             }
 
-            <hr class="my-1">
+            <br />
             <dt>
                 Policy Term
             </dt>
@@ -118,7 +113,7 @@
             <dd>
                 @Html.DisplayFor(model => ele.policy_term) Years
             </dd>
-            <hr class="my-1">
+        <br />
             <dt>
                 Premium paying term
             </dt>
@@ -127,7 +122,7 @@
                 @Html.DisplayFor(model => ele.payment_term) Years
             </dd>
 
-            <hr class="my-1">
+       <br />
 
             @if (ele.add_on != "null")
             {
@@ -142,10 +137,10 @@
                 <hr class="my-1">
 
                 LAnnualPremium = LAnnualPremium + 336;
-                LOneTimePremiuim = LOneTimePremiuim + (ele.payment_term * 336);
+                LMonthlyPremiuim = LMonthlyPremiuim + 28;
 
                 ELAnnualPremium = ELAnnualPremium + 336;
-                ELOneTimePremiuim = ELOneTimePremiuim + (ele.payment_term * 336);
+                ELMonthlyPremiuim = ELMonthlyPremiuim + 28;
 
             }
 
@@ -165,31 +160,28 @@
                     ₹@ELAnnualPremium
                 </dd>
             }
-            <hr class="my-1">
+          <br />
             <dt>
-                One Time Payment Amount
+               Monthly Payment Amount
             </dt>
 
             @if (ele.plan_type == "Life Option")
             {
                 <dd>
-                    ₹@LOneTimePremiuim
+                    ₹@LMonthlyPremiuim
                 </dd>
             }
             else
             {
                 <dd>
-                    ₹@ELOneTimePremiuim
+                    ₹@ELMonthlyPremiuim
                 </dd>
             }
 
 
-
-
-
-
         </dl>
-       
+        </div>
     </div>
-</div>
-}
+
+    }
+  

@@ -3,7 +3,7 @@
 @{ 
     ViewBag.Title = "Payment";
     }
-
+<br />
 
 
 @using (Html.BeginForm())
@@ -12,9 +12,9 @@
 
     <div class="jumbotron">
         <h3 style="color:red" class="display-4">Please make a Payment</h3>
-        <hr class="my-1">
+        <hr />
 
-        <div class="form-horizontal">
+        <div class="form-horizontal" style="color:#004c8f">
                        <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*<div class="form-group">

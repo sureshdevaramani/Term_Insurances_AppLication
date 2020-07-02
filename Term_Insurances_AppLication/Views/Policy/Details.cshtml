@@ -26,15 +26,19 @@
             background: #004c8f;
         }
 </style>
+<h3 class="display-4" style="color:red">Here is a summary of your plan</h3>
+<hr />
+
+
 
 @{
     double CoverAmount = Model.cover_amount;
 
     double LAnnualPremium = Math.Round(CoverAmount / 250.6002, 2);
-    double LMonthlyPremiuim = Math.Round(LAnnualPremium /12, 2);
+    double LMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
     double ELAnnualPremium = Math.Round(CoverAmount / 220.6002, 2);
-    double EMonthlyPremiuim = Math.Round(LAnnualPremium /12, 2);
+    double EMonthlyPremiuim = Math.Round(LAnnualPremium / 12, 2);
 
 
 
@@ -46,143 +50,147 @@
 
 
     <div class="jumbotron">
-        <h3 class="display-4">Here is a summary of your plan</h3>
-        <hr class="my-1">
+        <div style="color:#004c8f">
 
-        <dl class="dl-horizontal">
-            <dt>
-                Your Policy ID
-            </dt>
-
-            <dd>
-                @ViewBag.POLICY_Id
-            </dd>
-        </dl>
-
-        <dl class="dl-horizontal">
-
-            <dt>
-                Your Insurance Plan
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.plan_type)
-            </dd>
-
-            <hr class="my-1">
-
-            <dt>
-                Your Insurance Cover
-            </dt>
-
-            <dd>
-                ₹@Html.DisplayFor(model => model.cover_amount)
-            </dd>
-            <hr class="my-1">
-
-            @if (Model.plan_type == "Life Option")
-            {
+            <dl class="dl-horizontal">
                 <dt>
-                    Nominee wil receive
-                </dt>
-                <dd>
-                     Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
-                </dd>
-            }
-            else
-            {
-                <dt>
-                    Nominee wil receive
-                </dt>
-                <dd>
-                     Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
-                </dd>
-            }
-
-            <hr class="my-1">
-            <dt>
-                Policy Term
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.policy_term) Years
-            </dd>
-            <hr class="my-1">
-            <dt>
-                Premium paying term
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.payment_term) Years
-            </dd>
-
-            <hr class="my-1">
-
-            @if (Model.add_on != "null")
-            {
-                <dt>
-                    Add Ons
+                    Your Policy ID
                 </dt>
 
+                <dd>
+                    @ViewBag.POLICY_Id
+                </dd>
+            </dl>
+
+            <dl class="dl-horizontal">
+
+                <dt>
+                    Your Insurance Plan
+                </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.add_on) cover of ₹10,00,000.
+                    @Html.DisplayFor(model => model.plan_type)
                 </dd>
-                <hr class="my-1">
 
-                LAnnualPremium = LAnnualPremium + 336;
-                LMonthlyPremiuim = LMonthlyPremiuim + 28;
+                @*<hr class="my-1">*@
+                <br />
 
-                ELAnnualPremium = ELAnnualPremium + 336;
-                EMonthlyPremiuim = EMonthlyPremiuim + 28;
+                <dt>
+                    Your Insurance Cover
+                </dt>
 
-            }
-
-            <dt>
-                Annual Premium Amount
-            </dt>
-
-            @if (Model.plan_type == "Life Option")
-            {
                 <dd>
-                    ₹@LAnnualPremium
+                    ₹@Html.DisplayFor(model => model.cover_amount)
                 </dd>
-            }
-            else
-            {
+                @*<hr class="my-1">*@
+                <br />
+
+                @if (Model.plan_type == "Life Option")
+                {
+                    <dt>
+                        Nominee wil receive
+                    </dt>
+                    <dd>
+                        Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount) + additional of ₹@Html.DisplayFor(model => model.cover_amount) incase of death by accident.
+                    </dd>
+                }
+                else
+                {
+                    <dt>
+                        Nominee wil receive
+                    </dt>
+                    <dd>
+                        Cover Amount of ₹@Html.DisplayFor(model => model.cover_amount)
+                    </dd>
+                }
+
+                @*<hr class="my-1">*@
+                <br />
+                <dt>
+                    Policy Term
+                </dt>
+
                 <dd>
-                    ₹@ELAnnualPremium
+                    @Html.DisplayFor(model => model.policy_term) Years
                 </dd>
-            }
-            <hr class="my-1">
-            <dt>
-                One Time Payment Amount
-            </dt>
+                @*<hr class="my-1">*@
+                <br />
+                <dt>
+                    Premium paying term
+                </dt>
 
-            @if (Model.plan_type == "Life Option")
-            {
                 <dd>
-                    ₹@LMonthlyPremiuim
+                    @Html.DisplayFor(model => model.payment_term) Years
                 </dd>
-            }
-            else
-            {
-                <dd>
-                    ₹@EMonthlyPremiuim
-                </dd>
-            }
+
+                @*<hr class="my-1">*@
+                <br />
+
+                @if (Model.add_on != "null")
+                {
+                    <dt>
+                        Add Ons
+                    </dt>
 
 
+                    <dd>
+                        @Html.DisplayFor(model => model.add_on) cover of ₹10,00,000.
+                    </dd>
+                    @*<hr class="my-1">*@
+                    <br />
+
+                    LAnnualPremium = LAnnualPremium + 336;
+                    LMonthlyPremiuim = LMonthlyPremiuim + 28;
+
+                    ELAnnualPremium = ELAnnualPremium + 336;
+                    EMonthlyPremiuim = EMonthlyPremiuim + 28;
+
+                }
+
+                <dt>
+                    Annual Premium Amount
+                </dt>
+
+                @if (Model.plan_type == "Life Option")
+                {
+                    <dd>
+                        ₹@LAnnualPremium
+                    </dd>
+                }
+                else
+                {
+                    <dd>
+                        ₹@ELAnnualPremium
+                    </dd>
+                }
+                @*<hr class="my-1">*@
+                <br />
+                <dt>
+                    Monthly Payment Amount
+                </dt>
+
+                @if (Model.plan_type == "Life Option")
+                {
+                    <dd>
+                        ₹@LMonthlyPremiuim
+                    </dd>
+                }
+                else
+                {
+                    <dd>
+                        ₹@EMonthlyPremiuim
+                    </dd>
+                }
 
 
-
-
-        </dl>
+            </dl>
+         
+        </div>
         <div class="form-group">
 
             <div class="col-md-offset-2 col-md-10" id="box">
 
-                <a class="btn btn-primary" href="@Url.Action("Index","Payment")" >Continue to pay</a>
+                <a class="btn btn-primary" href="@Url.Action("Index","Payment")">Continue to pay</a>
 
             </div>
 

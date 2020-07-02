@@ -3,17 +3,49 @@
     ViewBag.Title = "Successfull";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<center>
+    <div class="jumbotron" style="margin-top: 100px; height: 400px; width:400px">
 
-<div class="jumbotron" style="margin-top: 100px; height: 400px; width:400px">
-    <p class="lead">
-        Your payment was successfull with <hr />
-        Payment ID = @ViewBag.Payment <hr />
-        For Customer ID = @ViewBag.Customerid <hr />
-        Through  @ViewBag.Payment_Mode <hr />
-        For @ViewBag.Premium Premium
-    </p>
-    <div>
-        <a href="~/DocumentUpload/Index" class="btn btn-primary">Continue </a>
+        <div style="color:#004c8f">
+
+            <h4> Your payment was successful with</h4>
+            <hr />
+
+            <dl class="dl-horizontal">
+                <dt>
+                    Transaction ID
+                </dt>
+                <dd>
+                    @ViewBag.Payment
+                </dd>
+                <br />
+                <dt>
+                    Customer ID
+                </dt>
+                <dd>
+                    @ViewBag.Customerid
+                </dd>
+                <br />
+                <dt>
+                    Through
+                </dt>
+                <dd>
+                    @ViewBag.Payment_Mode
+                </dd>
+                <br />
+                <dt>
+                    For Premium of
+                </dt>
+                <dd>
+                    ₹@ViewBag.Premium
+                </dd>
+        </div>
+
+
+        <div>
+            <a href="~/DocumentUpload/Index" class="btn btn-primary">Continue </a>
+        </div>
     </div>
-</div>
+</center>
+
 
