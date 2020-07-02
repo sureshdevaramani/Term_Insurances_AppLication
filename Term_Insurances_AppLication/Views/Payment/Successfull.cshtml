@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Successfull";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron" style="margin-top: 100px; height: 400px; width:400px">
+    <p class="lead">
+        Your payment was successfull with <hr />
+        Payment ID = @ViewBag.Payment <hr />
+        For Customer ID = @ViewBag.Customerid <hr />
+        Through  @ViewBag.Payment_Mode <hr />
+        For @ViewBag.Premium Premium
+    </p>
+    <div>
+        <a href="~/DocumentUpload/Index" class="btn btn-primary">Continue </a>
+    </div>
+</div>
+

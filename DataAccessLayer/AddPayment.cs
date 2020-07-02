@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace DataAccessLayer
 {
-   public class AddPayment
+    public class AddPayment
     {
         public static string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
         SqlConnection sqlCon = new SqlConnection(con);
@@ -22,7 +22,6 @@ namespace DataAccessLayer
 
         public void GetCobverAmount()
         {
-
 
 
 

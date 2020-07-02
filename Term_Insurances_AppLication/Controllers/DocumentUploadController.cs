@@ -82,39 +82,7 @@ namespace Term_Insurances_AppLication.Controllers
 
             AddDocumentDetails documents = new AddDocumentDetails();
 
-            documents.AddDocuments(addressSelected, FileName1, addressSelected2, FileName2);/*
-            string con = ConfigurationManager.ConnectionStrings["Myconnection"].ConnectionString;
-            SqlConnection sqlCon = new SqlConnection(con);
-
-            sqlCon.Open();
-
-
-            SqlCommand sqlCmd = new SqlCommand("select policy_id from POLICY_DETAILS where policy_id=(Select max (policy_id) From POLICY_DETAILS)", sqlCon);
-            SqlDataReader sdr = sqlCmd.ExecuteReader();
-
-            sdr.Read();
-            {
-
-                ViewBag.POLICYID = Convert.ToInt32(sdr["policy_id"]);
-
-            }
-
-
-            sqlCon.Close();
-
-
-            SqlCommand sqlCmd1 = new SqlCommand("INSERT into DOCUMENTS (policy_id,document_type,document_proof,document_type2,document_proof2) values (@policy_id,@document_type,@document_proof,@document_type2,@document_proof2)", sqlCon);
-            sqlCon.Open();
-
-            sqlCmd1.Parameters.AddWithValue("@policy_id", ViewBag.POLICYID);
-            sqlCmd1.Parameters.AddWithValue("@document_type", formdata["Departments"].ToString());      
-            sqlCmd1.Parameters.AddWithValue("@document_proof", FileName1);
-            sqlCmd1.Parameters.AddWithValue("@document_type2", formdata["Dropdown2"].ToString());
-            sqlCmd1.Parameters.AddWithValue("@document_proof2", FileName2);
-
-
-            sqlCmd1.ExecuteNonQuery();
-            */
+            documents.AddDocuments(addressSelected, FileName1, addressSelected2, FileName2);
             return RedirectToRoute(new
             {
                 controller = "DocumentUpload",

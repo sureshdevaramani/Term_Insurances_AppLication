@@ -199,6 +199,7 @@
     <Content Include="Views\YourPolices\Index.cshtml" />
     <Content Include="Views\YourPolices\KnowYourPolices.cshtml" />
     <Content Include="Views\YourPolices\KnowYourPolices1.cshtml" />
+    <Content Include="Views\Payment\Successfull.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Files\" />
